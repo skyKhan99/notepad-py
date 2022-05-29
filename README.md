@@ -7,6 +7,7 @@ Used Libraries:
 
 Codes:
 ***********************************************************************************************************************************************************************
+
 import tkinter as tk
 import tkinter.messagebox
 from tkinter import ttk
@@ -16,18 +17,22 @@ root = tk.Tk()
 root.title("GKHNote")
 
 # apply the grid layout
+
 root.grid_columnconfigure(0, weight=1)
 root.grid_rowconfigure(0, weight=1)
 
 # create the text widget
+
 text = tk.Text(root)
 text.grid(row=0, column=0, sticky="ewns")
 
 # create a scrollbar widget and set its command to the text widget
+
 scrollbar_v = ttk.Scrollbar(root, orient='vertical', command=text.yview)
 scrollbar_v.grid(row=0, column=1, sticky='ns')
 
 #  communicate back to the scrollbar
+
 text['yscrollcommand'] = scrollbar_v.set
 
 
@@ -78,6 +83,7 @@ def save_file():
 
 
 # create menubar
+
 menubar = tk.Menu(root)
 root.config(menu=menubar)
 
@@ -87,6 +93,7 @@ file_menu = tk.Menu(
 )
 
 # add commands to menu
+
 file_menu.add_command(label='New', command=new_file, background='darkblue', foreground='lightblue')
 file_menu.add_command(label='Open', command=open_file, background='darkblue', foreground='lightblue')
 file_menu.add_command(label='Save', command=save_file, background='darkblue', foreground='lightblue')
@@ -194,4 +201,5 @@ def on_closing():
 root.protocol("WM_DELETE_WINDOW", on_closing)
 status_bar.config(text=fi.current_file)
 root.mainloop()
+
 ***********************************************************************************************************************************************************************
