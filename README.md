@@ -5,6 +5,9 @@ With this program; could write, open and save text files.
 Used Libraries:
 -TkInter
 
+![Screenshot](notepad_ss.png)
+![Screenshot](notepad_theme_ss.png)
+
 Codes:
 ***********************************************************************************************************************************************************************
 
