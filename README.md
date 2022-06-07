@@ -13,8 +13,11 @@ Codes:
 
 # imports
 > import tkinter as tk
+
 > import tkinter.messagebox
+
 > from tkinter import ttk
+
 > from tkinter import filedialog as fd
 
 > root = tk.Tk()
