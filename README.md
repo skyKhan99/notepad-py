@@ -11,44 +11,47 @@ Used Libraries:
 Codes:
 ***********************************************************************************************************************************************************************
 
-import tkinter as tk
-import tkinter.messagebox
-from tkinter import ttk
-from tkinter import filedialog as fd
+# imports
+> import tkinter as tk
+> import tkinter.messagebox
+> from tkinter import ttk
+> from tkinter import filedialog as fd
 
-root = tk.Tk()
-root.title("GKHNote")
+> root = tk.Tk()
+> root.title("GKHNote")
 
 # apply the grid layout
 
-root.grid_columnconfigure(0, weight=1)
-root.grid_rowconfigure(0, weight=1)
+> root.grid_columnconfigure(0, weight=1)
+> root.grid_rowconfigure(0, weight=1)
 
 # create the text widget
 
-text = tk.Text(root)
-text.grid(row=0, column=0, sticky="ewns")
+> text = tk.Text(root)
+> text.grid(row=0, column=0, sticky="ewns")
 
 # create a scrollbar widget and set its command to the text widget
 
-scrollbar_v = ttk.Scrollbar(root, orient='vertical', command=text.yview)
-scrollbar_v.grid(row=0, column=1, sticky='ns')
+> scrollbar_v = ttk.Scrollbar(root, orient='vertical', command=text.yview)
+> scrollbar_v.grid(row=0, column=1, sticky='ns')
 
 #  communicate back to the scrollbar
 
-text['yscrollcommand'] = scrollbar_v.set
+> text['yscrollcommand'] = scrollbar_v.set
 
 
 class FileInfo:
+
     def __init__(self, current_file, current_dir):
         self.current_file = current_file
         self.current_dir = current_dir
 
 
-fi = FileInfo("New File", "")
+> fi = FileInfo("New File", "")
 
 
 def open_file():
+
     text.delete(0.0, 'end')
     dir = fd.askopenfilename(initialdir='/',
                              filetypes=(('Text File', '*.txt'),))
@@ -62,6 +65,7 @@ def open_file():
 
 
 def new_file():
+
     if tkinter.messagebox.askyesno("Save and open new file", "Do you want to save?"):
         if not fi.current_dir == None and not fi.current_file == 'New File':
             with open(f"{fi.current_dir}", "w") as f:
@@ -75,6 +79,7 @@ def new_file():
     status_bar.config(text=fi.current_file)
 
 def save_file():
+
     if fi.current_file != 'New File':
         with open(f"{fi.current_dir}", "w") as f:
             f.write(text.get(0.0, 'end'))
@@ -87,25 +92,20 @@ def save_file():
 
 # create menubar
 
-menubar = tk.Menu(root)
-root.config(menu=menubar)
+> menubar = tk.Menu(root)
+> root.config(menu=menubar)
 
-file_menu = tk.Menu(
-    menubar,
-    tearoff=0
-)
+> file_menu = tk.Menu(menubar, tearoff=0)
 
 # add commands to menu
 
-file_menu.add_command(label='New', command=new_file, background='darkblue', foreground='lightblue')
-file_menu.add_command(label='Open', command=open_file, background='darkblue', foreground='lightblue')
-file_menu.add_command(label='Save', command=save_file, background='darkblue', foreground='lightblue')
-menubar.add_cascade(
-    label='File',
-    menu=file_menu
-)
+> file_menu.add_command(label='New', command=new_file, background='darkblue', foreground='lightblue')
+> file_menu.add_command(label='Open', command=open_file, background='darkblue', foreground='lightblue')
+> file_menu.add_command(label='Save', command=save_file, background='darkblue', foreground='lightblue')
+> menubar.add_cascade(label='File', menu=file_menu)
 
 def font():
+
     fontTk = tkinter.Tk()
     fontTk.resizable(False, False)
     fontTk.geometry('150x250')
@@ -150,6 +150,7 @@ def font():
 
 
 def theme():
+
     themeTk = tk.Tk()
     themeTk.resizable(False, False)
     themeTk.geometry('200x100')
@@ -185,12 +186,13 @@ def theme():
     apply_btn.pack()
 
 
-menubar.add_command(label='Font', command=font)
-menubar.add_command(label='Theme', command=theme)
-status_bar = tk.Label(root)
-status_bar.grid(row=1, column=0)
+> menubar.add_command(label='Font', command=font)
+> menubar.add_command(label='Theme', command=theme)
+> status_bar = tk.Label(root)
+> status_bar.grid(row=1, column=0)
 
 def on_closing():
+
     if text.get(0.0, 'end') != "\n":
         if tkinter.messagebox.askyesno("Save and exit", "Do you want to save?"):
             if fi.current_file != 'New File':
@@ -201,8 +203,8 @@ def on_closing():
                 with open(f"{dir}.txt", "w") as f:
                     f.write(text.get(0.0, 'end'))
     root.destroy()
-root.protocol("WM_DELETE_WINDOW", on_closing)
-status_bar.config(text=fi.current_file)
-root.mainloop()
+> root.protocol("WM_DELETE_WINDOW", on_closing)
+> status_bar.config(text=fi.current_file)
+> root.mainloop()
 
 ***********************************************************************************************************************************************************************
